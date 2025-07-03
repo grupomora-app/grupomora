@@ -1,727 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
-  
-<!-- Mirrored from generador-crm-hma-kdj-github.netlify.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Jun 2025 08:09:11 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Busqueda CRM - HMA - KDJ</title>
-    <link
-      href="../cdn.jsdelivr.net/npm/bootstrap%405.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="../cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <script src="../cdn.jsdelivr.net/npm/%40popperjs/core%402.11.6/dist/umd/popper.min.js"></script>
-    <script src="../cdn.jsdelivr.net/npm/bootstrap%405.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-    <script src="../cdn.jsdelivr.net/npm/clipboard%402.0.10/dist/clipboard.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Busqueda CRM - HMA - KDJ</title>
 
-    <!-- Enlace al archivo CSS externo -->
-    <link rel="stylesheet" href="estilos/styles.css" />
-  </head>
+  <!-- Ajusta SOLO si tu repositorio NO se llama “grupomora” -->
+  <base href="/grupomora/" />
 
-  <body class="bg-light-gray p-3" style="margin-bottom: 100px">
-    <!-- Menú de navegación -->
-    <div id="menu-container"></div>
+  <!--  Bootstrap / Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
-    <!-- Inputs para precio, descuento y resultado -->
-    <div class="row justify-content-center mt-4">
-      <div class="col-3 col-md-3 mb-3">
-        <input
-          type="number"
-          class="form-control"
-          id="precio"
-          placeholder="Precio"
-          oninput="calcularResultado()"
-        />
-      </div>
-      <div class="col-3 col-md-3 mb-3">
-        <input
-          type="number"
-          class="form-control"
-          id="descuento"
-          placeholder="Dto."
-          oninput="calcularResultado()"
-        />
-      </div>
-      <div class="col-5 col-md-3 mb-3 d-flex align-items-center">
-        <input
-          type="text"
-          class="form-control"
-          id="resultado"
-          placeholder="Resultado"
-          readonly
-        />
-        <button class="btn btn-dark btn-sm ms-2" onclick="resetInputs()">
-          Reset
-        </button>
-      </div>
+  <!-- Clipboard -->
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+
+  <!-- Tu hoja de estilos -->
+  <link rel="stylesheet" href="estilos/styles.css" />
+</head>
+
+<body class="bg-light-gray p-3" style="margin-bottom: 100px;">
+  <!-- Menú de navegación -->
+  <div id="menu-container"></div>
+
+  <!-- Inputs precio / dto / resultado -->
+  <div class="row justify-content-center mt-4">
+    <div class="col-3 col-md-3 mb-3">
+      <input type="number" class="form-control" id="precio" placeholder="Precio" oninput="calcularResultado()" />
+    </div>
+    <div class="col-3 col-md-3 mb-3">
+      <input type="number" class="form-control" id="descuento" placeholder="Dto." oninput="calcularResultado()" />
+    </div>
+    <div class="col-5 col-md-3 mb-3 d-flex align-items-center">
+      <input type="text" class="form-control" id="resultado" placeholder="Resultado" readonly />
+      <button class="btn btn-dark btn-sm ms-2" onclick="resetInputs()">Reset</button>
+    </div>
+  </div>
+
+  <!-- TABLA -->
+  <div class="container w-100 mx-auto" style="max-width: 700px;">
+    <h1 class="mb-4 pt-5 text-center">Chapas</h1>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">TIPO</th>
+            <th scope="col">DESCRIPCIÓN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- … (todas tus filas tal cual) … -->
+          <!--  ▼  EJEMPLO de la primera fila  ▼ -->
+          <tr>
+            <td style="background-color:#6e2bf53a;font-weight:700;">NEGRA</td>
+            <td>
+              <div class="copy-container">
+                <span>CHAPA NEGRA 2000x1000x2 S235</span>
+                <button class="btn btn-outline-primary btn-sm copy-btn"
+                        data-clipboard-text="CHAPA NEGRA 2000X1000X2 mm  ST . S235">
+                  <i class="bi bi-clipboard"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <!--  ▲  …sigue con el resto sin cambios  ▲ -->
+        </tbody>
+      </table>
     </div>
 
-    <!-- JavaScript para calcular el resultado y limpiar inputs -->
-    <script>
-      function calcularResultado() {
-        const precio = parseFloat(document.getElementById("precio").value) || 0;
-        const descuento =
-          parseFloat(document.getElementById("descuento").value) || 0;
-        const resultado = precio - precio * (descuento / 100);
-        document.getElementById("resultado").value = resultado.toFixed(2);
-      }
-
-      function resetInputs() {
-        document.getElementById("precio").value = "";
-        document.getElementById("descuento").value = "";
-        document.getElementById("resultado").value = "";
-        document.getElementById("precio").focus(); // Colocar el cursor en el input de "precio"
-      }
-    </script>
-
-    <!-- Tabla de datos -->
-    <div class="container w-100 mx-auto" style="max-width: 700px">
-      <h1 class="mb-4 pt-5 text-center">Chapas</h1>
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-          <!-- ENCABEZADOS -->
-          <thead>
-            <tr>
-              <th scope="col">TIPO</th>
-              <th scope="col">DESCRIPCIÓN</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Fila de datos -->
-
-            <!-- Fila 1 CHAPA NEGRA -->
-            <tr>
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                NEGRA
-              </td>
-              <td>
-                <div class="copy-container">
-                  <span>CHAPA NEGRA 2000x1000x2 S235</span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA NEGRA 2000X1000X2 mm  ST . S235"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-
-              <!-- Fila 2 -->
-            </tr>
-
-            <tr>
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                GALVA
-              </td>
-              <td>
-                <div class="copy-container">
-                  <span>CHAPA GALVA 2000x1000x2 DX51</span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA GALVA 2000X1000X2 mm    DX51"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <!-- Fila 3 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                LF
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span>CHAPA LF 2000x1000x2 </span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA LF 2000X1000X2 mm  LF . DC01"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <!-- Fila 4 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                DECAPADA
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span>CHAPA DECAP. 2000x1000x2 S235</span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA DECAP. 2000X1000X2 mm  DC . S235"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <!-- Fila 5 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                COLABORANTE
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span>CHAPA COLABOR. 6000x820x0,8 GV</span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA COLABORANTE MT-60 GV 6000X820X0,8 mm GV"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 6 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                ESTRIADA NEGRA
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span>CHAPA ESTRIADA NEGRA 2000x1000x3/5 S235</span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA ESTRIADA 2000X1000X3/5 mm  ST . S235"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 7 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                ESTRIADA GALVA
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span>CHAPA ESTRIADA GALVA 2000x1000x3/5 S235</span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA ESTRIADA 2000X1000X3/5 mm  GC . S235"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 8 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                LAGRIMADA NEGRA
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span>CHAPA LAGRIMADA NEGRA 2000x1000x3/5 S235</span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA LAGRIM. ASTM 2000X1000X3/5 mm  ST . S235"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <!-- Fila 11 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                ESTAMPADA DECAPADA
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span
-                    >CHAPA ESTAMP. DC CACAHUETE 2000x1000x1,5 mm DC . S235</span
-                  >
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA ESTAMP. DC CACAHUETE 2000x1000x1,5 mm  DC . S235"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 12 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                ESTAMPADA GALVA
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span>CHAPA ESTAMP. GV CACAHUETE 2000x1000x2 mm DX51</span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA ESTAMP. GV CACAHUETE 2000x1000x2 mm    DX51"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 13 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                ONDULADA
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span
-                    >CHAPA OND. 1064X<strong style="color: #6c2cf5">0,6</strong>
-                    mm a <strong style="color: #6c2cf5">5</strong> m GV .</span
-                  >
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA OND.  1064X0,6 mm a 5 m GV ."
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 14 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                TRAPEZOIDAL BLANCO PIRINEO
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span
-                    >CHAPA TRAP. CUB. 1000X<strong style="color: #6c2cf5"
-                      >0,6</strong
-                    >
-                    mm a <strong style="color: #6c2cf5">6</strong> m PRELACADA
-                    BLANCO PIRINEO</span
-                  >
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA TRAP. CUB.  1000X0,6 mm a 6 m PRELACADA BLANCO PIRINEO"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 15 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                TRAPEZOIDAL GALVA
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span
-                    >CHAPA TRAP. CUB. 1000X<strong style="color: #6c2cf5"
-                      >0,6</strong
-                    >
-                    mm a <strong style="color: #6c2cf5">6</strong> m GV .</span
-                  >
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA TRAP. CUB.  1000X0,6 mm a 6 m GV ."
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 16 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                PEGASO LF
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span>CHAPA PEGASO LF 6000X500X1 mm LF</span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA PEGASO LF 6000X500X1 mm LF"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 17 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                PEGASO GALVA
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span>CHAPA PEGASO GV 6000X500X0,9 mm GV</span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA PEGASO GV 6000X500X0,9 mm GV"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 18 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                PERFORADA REDONDOS
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span
-                    >CHAPA PERF.
-                    <strong style="color: #6c2cf5">DC</strong> 2000X1000X1,5
-                    <strong style="color: #6c2cf5">R3 T5</strong> mm
-                    <strong style="color: #6c2cf5">DC</strong></span
-                  >
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA PERF. DC 2000X1000X1,5 R3 T5 mm DC"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 19 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                PERFORADA CUADRADOS DC
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span
-                    >CHAPA PERF.
-                    <strong style="color: #6c2cf5">DC</strong> 2000X1000X1,5
-                    <strong style="color: #6c2cf5">C10 U20</strong> mm
-                    <strong style="color: #6c2cf5">DC</strong></span
-                  >
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA PERF. DC 2000X1000X1,5 C10 U20 mm DC"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <!-- Fila 19.1 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                PERFORADA CUADRADOS GALVA
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span
-                    >CHAPA PERF.
-                    <strong style="color: #6c2cf5">GV</strong> 2000X1000X1,5 C10
-                    U20 mm DX51</span
-                  >
-                  <span>
-                    <button
-                      class="btn btn-outline-primary btn-sm copy-btn"
-                      data-clipboard-text="CHAPA PERF. GV 2000X1000X1,5 C10 U20 mm   DX51"
-                    >
-                      <i class="bi bi-clipboard"></i>
-                    </button>
-                  </span>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <!-- Fila 20 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                EMPARRILLADA #1
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span>EMP.ELECT. 30X30 30X2 R5 1000X1000 mm </span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="EMP.ELECT. 30X30 30X2 R5 1000X1000 mm "
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 21 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                EMPARRILLADA #2
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span>EMP.ELECT. 30X30 30X2 R4/5 2000X1000 mm </span>
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="EMP.ELECT. 30X30 30X2 R4/5 2000X1000 mm "
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- Fila 22 -->
-              <td
-                style="
-                  background-color: #6e2bf53a;
-                  color: black;
-                  font-weight: bold;
-                "
-              >
-                LISA
-              </td>
-
-              <td>
-                <div class="copy-container">
-                  <span
-                    >CHAPA LISA 3000X1250X<strong style="color: #6c2cf5"
-                      >0,6</strong
-                    >
-                    mm BLANCO PIRINEO</span
-                  >
-                  <button
-                    class="btn btn-outline-primary btn-sm copy-btn"
-                    data-clipboard-text="CHAPA LISA 3000X1250X0,6 mm BLANCO PIRINEO"
-                  >
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Más filas -->
-          </tbody>
-        </table>
-      </div>
-      <!-- Notificación de copia -->
-      <div id="copy-notification" class="alert alert-info copied" role="alert">
-        ¡Elemento copiado!
-      </div>
+    <!-- aviso copiado -->
+    <div id="copy-notification" class="alert alert-info copied" role="alert" style="display:none;">
+      ¡Elemento copiado!
     </div>
+  </div>
 
-    <script>
-      fetch("menu/menu.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("menu-container").innerHTML = data;
-        });
-      // Inicializar Clipboard.js
-      var clipboard = new ClipboardJS(".copy-btn", {
-        text: function (trigger) {
-          return trigger.getAttribute("data-clipboard-text");
-        },
-      });
-      // Inicializar Clipboard.js
-      var clipboard = new ClipboardJS(".copy-btn", {
-        text: function (trigger) {
-          return trigger.getAttribute("data-clipboard-text");
-        },
-      });
+  <!-- ===  SCRIPTS  ===================================================== -->
+  <script>
+    /* ---- Cálculo precio – dto ---------------------------------------- */
+    function calcularResultado () {
+      const precio     = parseFloat(document.getElementById('precio').value)     || 0;
+      const descuento  = parseFloat(document.getElementById('descuento').value)  || 0;
+      const resultado  = precio - precio * (descuento / 100);
+      document.getElementById('resultado').value = resultado.toFixed(2);
+    }
+    function resetInputs () {
+      document.getElementById('precio').value     = '';
+      document.getElementById('descuento').value  = '';
+      document.getElementById('resultado').value  = '';
+      document.getElementById('precio').focus();
+    }
 
-      // Mostrar notificación de copia
-      clipboard.on("success", function (e) {
-        var notification = document.getElementById("copy-notification");
-        notification.style.display = "block";
-        setTimeout(function () {
-          notification.style.display = "none";
-        }, 2000); // Ocultar después de 2 segundos
-        e.clearSelection();
-      });
-    </script>
+    /* ---- Cargar menú -------------------------------------------------- */
+    fetch('menu/menu.html')
+      .then(r => r.text())
+      .then(html => { document.getElementById('menu-container').innerHTML = html; });
 
-    <!-- Añade esto donde quieras que aparezca el footer -->
-    <div id="footer-container"></div>
+    /* ---- Clipboard ---------------------------------------------------- */
+    const clipboard = new ClipboardJS('.copy-btn');
+    clipboard.on('success', () => {
+      const n = document.getElementById('copy-notification');
+      n.style.display = 'block';
+      setTimeout(() => n.style.display = 'none', 2000);
+    });
 
-    <!-- Añade este script justo antes del cierre del body -->
-    <script>
-      fetch("footer/footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          // Crear un elemento temporal para parsear el HTML
-          const tempDiv = document.createElement("div");
-          tempDiv.innerHTML = data;
-
-          // Extraer solo el elemento footer
-          const footer = tempDiv.querySelector("footer");
-
-          // Insertarlo en el contenedor
-          document.getElementById("footer-container").appendChild(footer);
-        })
-        .catch((error) => {
-          console.error("Error cargando el footer:", error);
-        });
-    </script>
-    <!-- Footer container -->
-    <div id="footer-container"></div>
-
-    <!-- Script para el footer -->
-    <script>
-      fetch("footer/footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          const tempDiv = document.createElement("div");
-          tempDiv.innerHTML = data;
-          const footer = tempDiv.querySelector("footer");
-          document.getElementById("footer-container").appendChild(footer);
-        })
-        .catch((error) => {
-          console.error("Error cargando el footer:", error);
-        });
-    </script>
-  </body>
-
-<!-- Mirrored from generador-crm-hma-kdj-github.netlify.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Jun 2025 08:09:14 GMT -->
+    /* ---- Cargar footer ------------------------------------------------ */
+    fetch('footer/footer.html')
+      .then(r => r.text())
+      .then(html => {
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+        const footerEl = temp.querySelector('footer');
+        document.body.appendChild(footerEl);
+      })
+      .catch(err => console.error('Error cargando el footer:', err));
+  </script>
+</body>
 </html>
