@@ -1,58 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Búsqueda CRM – HMA · KDJ</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Búsqueda CRM – HMA KDJ</title>
 
-  <!-- Mantén “./” si tu página se publica en  https://grupomora-app.github.io/grupomora/ -->
-  <base href="./" />
+  <!-- fuerza rutas relativas desde la carpeta actual -->
+  <base href="./">
 
-  <!-- Bootstrap 5 + iconos -->
-  <link  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" defer></script>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- ClipboardJS -->
-  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js" defer></script>
-
-  <!-- Tus estilos -->
-  <link rel="stylesheet" href="estilos/styles.css" />
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="estilos/styles.css">
 </head>
-
 <body class="bg-light-gray p-3" style="margin-bottom:100px">
-  <!-- ========= MENÚ ========= -->
+
+  <!-- MENÚ -->
   <div id="menu-container"></div>
 
-  <!-- ========= CALCULADORA ========= -->
+  <!-- CALCULADORA -->
   <div class="row justify-content-center mt-4 g-3">
-    <div class="col-12 col-md-3">
-      <input type="number" class="form-control" id="precio"
-             placeholder="Precio" oninput="calcularResultado()">
-    </div>
-    <div class="col-12 col-md-3">
-      <input type="number" class="form-control" id="descuento"
-             placeholder="Dto." oninput="calcularResultado()">
-    </div>
+    <div class="col-12 col-md-3"><input id="precio"    class="form-control" type="number" placeholder="Precio"  oninput="calcular()"></div>
+    <div class="col-12 col-md-3"><input id="descuento" class="form-control" type="number" placeholder="Dto."    oninput="calcular()"></div>
     <div class="col-12 col-md-4 d-flex align-items-center">
-      <input type="text" class="form-control" id="resultado"
-             placeholder="Resultado" readonly>
-      <button class="btn btn-dark btn-sm ms-2" onclick="resetInputs()">Reset</button>
+      <input id="resultado" class="form-control" type="text" placeholder="Resultado" readonly>
+      <button class="btn btn-dark btn-sm ms-2" onclick="resetCalc()">Reset</button>
     </div>
   </div>
 
-  <!-- ========= TABLA ========= -->
-  <div class="container w-100 mx-auto" style="max-width:700px">
-    <h1 class="mb-4 pt-5 text-center">Chapas</h1>
+  <!-- TABLA -->
+  <div class="container mx-auto" style="max-width:700px">
+    <h1 class="pt-5 mb-4 text-center">Chapas</h1>
 
     <div class="table-responsive">
       <table class="table table-bordered table-hover align-middle">
         <thead class="table-primary text-center">
-          <tr><th scope="col">TIPO</th><th scope="col">DESCRIPCIÓN</th></tr>
+          <tr><th>TIPO</th><th>DESCRIPCIÓN</th></tr>
         </thead>
         <tbody>
-  <!-- Fila de datos -->
+       <!-- Fila de datos -->
 
             <!-- Fila 1 CHAPA NEGRA -->
             <tr>
@@ -606,55 +594,43 @@
       </table>
     </div>
 
-    <div id="copy-notification"
-         class="alert alert-info copied position-fixed bottom-0 start-50 translate-middle-x px-3 py-2"
-         style="display:none;z-index:1050">
+    <!-- Notificación -->
+    <div id="copied" class="alert alert-info position-fixed bottom-0 start-50 translate-middle-x px-3 py-2" style="display:none;z-index:1050">
       ¡Elemento copiado!
     </div>
   </div>
 
-  <!-- ========= FOOTER ========= -->
+  <!-- FOOTER -->
   <div id="footer-container"></div>
 
-  <!-- =========  JS  ========= -->
+  <!-- JS al final para que todo el DOM exista -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+
   <script>
-    /* ► Cálculo precio – descuento */
-    function calcularResultado(){
-      const p=parseFloat(precio.value)||0,
-            d=parseFloat(descuento.value)||0;
+    /* -----  Menú y footer  ----- */
+    fetch('menu/menu.html').then(r=>r.text()).then(h=>menu-container.innerHTML=h);
+    fetch('footer/footer.html').then(r=>r.text()).then(h=>{
+      const t=document.createElement('div'); t.innerHTML=h.trim();
+      const f=t.querySelector('footer'); if(f) footer-container.appendChild(f);
+    });
+
+    /* -----  Calculadora  ----- */
+    function calcular(){
+      const p=parseFloat(precio.value)||0, d=parseFloat(descuento.value)||0;
       resultado.value=(p-p*d/100).toFixed(2);
     }
-    function resetInputs(){
-      ['precio','descuento','resultado']
-        .forEach(id=>document.getElementById(id).value='');
-      precio.focus();
-    }
+    function resetCalc(){ precio.value=descuento.value=resultado.value=''; precio.focus(); }
 
-    /* ► Cargar menú */
-    fetch('menu/menu.html')
-      .then(r=>r.text())
-      .then(html=>{ menu-container.innerHTML=html })
-      .catch(e=>console.error('Error menú:',e));
-
-    /* ► Clipboard */
+    /* -----  Clipboard  ----- */
     document.addEventListener('DOMContentLoaded',()=>{
       const cb=new ClipboardJS('.copy-btn');
       cb.on('success',()=>{
-        const n=document.getElementById('copy-notification');
-        n.style.display='block';
-        setTimeout(()=>n.style.display='none',2000);
+        copied.style.display='block';
+        setTimeout(()=>copied.style.display='none',2000);
       });
     });
-
-    /* ► Cargar footer */
-    fetch('footer/footer.html')
-      .then(r=>r.text())
-      .then(html=>{
-        const tmp=document.createElement('div'); tmp.innerHTML=html.trim();
-        const f=tmp.querySelector('footer');
-        if(f) footer-container.appendChild(f);
-      })
-      .catch(e=>console.error('Error footer:',e));
   </script>
 </body>
 </html>
