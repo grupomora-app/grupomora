@@ -3,55 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- ➊  Todas las rutas “relativas” parten de /grupomora/ -->
   <base href="/grupomora/">
 
   <title>Peldaños Repujados | Catálogo Grupomora</title>
 
-  <!-- ➋  Bootstrap + Icons -->
+  <!-- Bootstrap + iconos -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- ➌  Estilos propios -->
+  <!-- Estilos -->
   <link rel="stylesheet" href="estilos/styles.css">
 
-  <!-- ➍  JS externos (defer) -->
+  <!-- JS externos -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"    defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"            defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js" defer></script>
 </head>
 
 <body class="bg-light-gray p-3">
 
-  <!-- ▸ MENÚ (inyectado) -->
+  <!-- ▸ MENÚ -->
   <div id="menu-container"></div>
 
-  <!-- ▸ CÁLCULO DTO -->
+  <!-- ▸ CALCULADORA -->
   <section class="row justify-content-center mt-4 g-2">
-    <div class="col-12 col-md-3">
-      <input id="precio"     type="number" class="form-control" placeholder="Precio" oninput="calc()">
-    </div>
-    <div class="col-12 col-md-3">
-      <input id="descuento"  type="number" class="form-control" placeholder="Dto."   oninput="calc()">
-    </div>
+    <div class="col-12 col-md-3"><input id="precio"    class="form-control" type="number" placeholder="Precio"  oninput="calc()"></div>
+    <div class="col-12 col-md-3"><input id="descuento" class="form-control" type="number" placeholder="Dto."    oninput="calc()"></div>
     <div class="col-12 col-md-3 d-flex align-items-center">
-      <input id="resultado"  type="text"    class="form-control" placeholder="Resultado" readonly>
+      <input id="resultado" class="form-control" type="text"   placeholder="Resultado" readonly>
       <button class="btn btn-dark btn-sm ms-2" onclick="reset()">Reset</button>
     </div>
   </section>
 
   <!-- ▸ TABLA -->
-  <main class="container" style="max-width:700px">
+  <main class="container" style="max-width: 800px">
     <h1 class="pt-5 text-center">Peldaños repujados</h1>
 
     <div class="table-responsive">
       <table class="table table-bordered table-hover align-middle">
-        <thead class="table-primary text-center">
-          <tr><th>TIPO</th><th>DESCRIPCIÓN</th></tr>
-        </thead>
+        <thead class="table-primary text-center"><tr><th>TIPO</th><th>DESCRIPCIÓN</th></tr></thead>
         <tbody>
-          <!-- Fila 1 -->
           <tr>
             <td class="fw-bold bg-light">GV</td>
             <td class="d-flex justify-content-between">
@@ -62,7 +53,6 @@
               </button>
             </td>
           </tr>
-          <!-- Fila 2 -->
           <tr>
             <td class="fw-bold bg-light">GV</td>
             <td class="d-flex justify-content-between">
@@ -73,7 +63,6 @@
               </button>
             </td>
           </tr>
-          <!-- Fila 3 -->
           <tr>
             <td class="fw-bold bg-light">GV</td>
             <td class="d-flex justify-content-between">
@@ -84,42 +73,38 @@
               </button>
             </td>
           </tr>
-          <!-- …añade más filas si lo necesitas… -->
         </tbody>
       </table>
     </div>
 
-    <!-- Aviso de copiado -->
     <div id="copy-notification" class="alert alert-info copied" role="alert" style="display:none">
       ¡Texto copiado!
     </div>
   </main>
 
-  <!-- ▸ FOOTER (inyectado) -->
+  <!-- ▸ FOOTER -->
 <!--  <div id="footer-container"></div> -->
 
-  <!-- ▸ SCRIPTS PROPIOS -->
+  <!-- ▸ SCRIPTS -->
   <script>
-    /* === Menú & footer === */
-    fetch('menu/menu.html').then(r=>r.text()).then(html=> menu-container.innerHTML = html);
-    fetch('footer/footer.html').then(r=>r.text()).then(h=>{
+    /* menú + footer (rutas absolutas) */
+    fetch('/grupomora/menu/menu.html')  .then(r=>r.text()).then(h=>menu-container.innerHTML = h);
+    fetch('/grupomora/footer/footer.html').then(r=>r.text()).then(h=>{
       const d=document.createElement('div'); d.innerHTML=h;
       footer-container.appendChild(d.querySelector('footer'));
     });
 
-    /* === Calculadora descuento === */
+    /* calculadora */
     function calc(){
-      const p=parseFloat(precio.value)||0,
-            d=parseFloat(descuento.value)||0;
+      const p=parseFloat(precio.value)||0, d=parseFloat(descuento.value)||0;
       resultado.value=(p-p*d/100).toFixed(2);
     }
     function reset(){
-      precio.value=descuento.value=resultado.value='';
-      precio.focus();
+      precio.value=descuento.value=resultado.value=''; precio.focus();
     }
 
-    /* === Clipboard global === */
-    document.addEventListener('DOMContentLoaded', ()=>{
+    /* clipboard */
+    document.addEventListener('DOMContentLoaded',()=>{
       const cb=new ClipboardJS('.copy-btn');
       cb.on('success',()=>{
         copy-notification.style.display='block';
