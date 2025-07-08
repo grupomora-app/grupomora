@@ -84,18 +84,26 @@
   </main>
 
   <!-- ▸ FOOTER -->
-  <div id="footer-container"></div>
+<!--  <div id="footer-container"></div> -->
 
   <!-- ▸ SCRIPTS -->
   <script>
-    /* menú + footer: basta 'menu/menu.html' gracias al <base> */
-    fetch('menu/menu.html').then(r=>r.text()).then(txt=> menu-container.innerHTML = txt);
-    fetch('footer/footer.html').then(r=>r.text()).then(txt=>{
-      const box=document.createElement('div'); box.innerHTML=txt;
-      footer-container.appendChild(box.querySelector('footer'));
-    });
+    /* Menú & footer: ahora con getElementById para evitar error */
+    fetch('menu/menu.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('menu-container').innerHTML = html;
+      });
 
-    /* calculadora */
+    fetch('footer/footer.html')
+      .then(r => r.text())
+      .then(html => {
+        const box = document.createElement('div'); box.innerHTML = html;
+        document.getElementById('footer-container')
+                .appendChild(box.querySelector('footer'));
+      });
+
+    /* Calculadora */
     function calc(){
       const p=parseFloat(precio.value)||0, d=parseFloat(descuento.value)||0;
       resultado.value=(p-p*d/100).toFixed(2);
@@ -105,7 +113,7 @@
       precio.focus();
     }
 
-    /* clipboard */
+    /* Clipboard */
     document.addEventListener('DOMContentLoaded',()=>{
       const cb=new ClipboardJS('.copy-btn');
       cb.on('success',()=>{
