@@ -4,30 +4,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- 1️⃣  Todas las rutas relativas apuntan a /grupomora/ -->
+  <!-- todas las rutas relativas parten de /grupomora/ -->
   <base href="/grupomora/">
 
   <title>Chapa Ondulada | Catálogo Grupomora</title>
 
-  <!-- 2️⃣  Bootstrap + Icons CDN -->
+  <!-- Bootstrap & Icons (CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"               rel="stylesheet">
 
-  <!-- 3️⃣  CSS propio -->
+  <!-- estilos propios -->
   <link rel="stylesheet" href="estilos/styles.css">
 
-  <!-- 4️⃣  JS externos -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" defer></script>
+  <!-- JS externos -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"   defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"          defer></script>
 </head>
 
 <body class="bg-light-gray p-3">
 
-  <!-- ▸ MENÚ (inyectado) -->
+  <!-- MENÚ -->
   <div id="menu-container"></div>
 
-  <!-- ▸ CALCULADORA -->
+  <!-- calculadora -->
   <section class="row justify-content-center mt-4 g-2">
     <div class="col-12 col-md-3"><input id="precio"    class="form-control" type="number" placeholder="Precio"  oninput="calc()"></div>
     <div class="col-12 col-md-3"><input id="descuento" class="form-control" type="number" placeholder="Dto."    oninput="calc()"></div>
@@ -37,12 +37,14 @@
     </div>
   </section>
 
-  <!-- ▸ TABLA 0,5 (una fila de ejemplo - duplica <tr> si necesitas más) -->
+  <!-- TABLA (ejemplo 0 ,5 mm) -->
   <main class="container" style="max-width:800px">
     <h2 class="pt-5 text-center">Chapa Ondulada <span class="text-primary">0,5</span></h2>
     <div class="table-responsive mb-4">
       <table class="table table-bordered table-hover align-middle">
-        <thead class="table-primary text-center"><tr><th>TIPO</th><th>DESCRIPCIÓN</th></tr></thead>
+        <thead class="table-primary text-center">
+          <tr><th>TIPO</th><th>DESCRIPCIÓN</th></tr>
+        </thead>
         <tbody>
           <tr>
             <td class="fw-bold bg-light">GV</td>
@@ -58,11 +60,13 @@
       </table>
     </div>
 
-    <!-- ▸ TABLA 0,6 (una fila de ejemplo) -->
+    <!-- TABLA (ejemplo 0 ,6 mm) -->
     <h2 class="pt-3 text-center">Chapa Ondulada <span class="text-primary">0,6</span></h2>
     <div class="table-responsive">
       <table class="table table-bordered table-hover align-middle">
-        <thead class="table-primary text-center"><tr><th>TIPO</th><th>DESCRIPCIÓN</th></tr></thead>
+        <thead class="table-primary text-center">
+          <tr><th>TIPO</th><th>DESCRIPCIÓN</th></tr>
+        </thead>
         <tbody>
           <tr>
             <td class="fw-bold bg-light">GV</td>
@@ -84,12 +88,12 @@
     </div>
   </main>
 
-  <!-- ▸ FOOTER -->
+  <!-- FOOTER -->
   <div id="footer-container"></div>
 
-  <!-- ▸ SCRIPTS -->
+  <!-- Scripts propios -->
   <script>
-    /* Menú + footer (rutas relativas gracias a <base>) */
+    /* menú y footer */
     fetch('menu/menu.html').then(r=>r.text()).then(html=>{
       document.getElementById('menu-container').innerHTML = html;
     });
@@ -101,20 +105,22 @@
 
     /* calculadora */
     function calc(){
-      const p=parseFloat(precio.value)||0, d=parseFloat(descuento.value)||0;
-      resultado.value=(p-p*d/100).toFixed(2);
+      const p=parseFloat(precio.value)||0,
+            d=parseFloat(descuento.value)||0;
+      resultado.value = (p - p*d/100).toFixed(2);
     }
     function reset(){
-      precio.value=descuento.value=resultado.value='';
+      precio.value = descuento.value = resultado.value = '';
       precio.focus();
     }
 
     /* clipboard */
-    document.addEventListener('DOMContentLoaded',()=>{
-      const cb=new ClipboardJS('.copy-btn');
-      cb.on('success',()=>{
-        copy-notification.style.display='block';
-        setTimeout(()=>copy-notification.style.display='none',1800);
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const n   = document.getElementById('copy-notification');
+      const cb  = new ClipboardJS('.copy-btn');
+      cb.on('success', ()=>{
+        n.style.display='block';
+        setTimeout(()=>{ n.style.display='none'; }, 1800);
       });
     });
   </script>
