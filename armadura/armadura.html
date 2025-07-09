@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- raíz para TODAS las rutas internas -->
+  <!-- todas las rutas internas parten de /grupomora/ -->
   <base href="/grupomora/">
 
-  <title>Armadura (vigueta) · Catálogo Grupomora</title>
+  <title>Buscador Grupomora</title>
 
-  <!-- Bootstrap 5 + Icons (CDN limpios) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"  rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"            rel="stylesheet">
+  <!-- Bootstrap 5 + Icons (CDN absolutos) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"               rel="stylesheet">
 
   <!-- estilos propios -->
   <link rel="stylesheet" href="estilos/styles.css">
 
-  <!-- JS externos defer -->
+  <!-- JS externos (defer) -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"  defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"           defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"   defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"            defer></script>
 </head>
 
 <body class="bg-light-gray p-3">
@@ -37,50 +37,110 @@
     </div>
   </section>
 
-  <!-- ▸ TABLA ARMADURA -->
-  <main class="container" style="max-width:740px">
-    <h2 class="pt-5 text-center">Armadura&nbsp;para&nbsp;forjado</h2>
+  <!-- ▸ TABLA -->
 
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover align-middle">
-        <thead class="table-primary text-center"><tr><th>ALTURA</th><th>DESCRIPCIÓN / COPIAR</th></tr></thead>
-        <tbody>
-          <!-- duplica <tr> para todas tus alturas -->
-          <tr>
-            <td class="fw-bold bg-light text-center">H 10 cm</td>
-            <td class="d-flex justify-content-between">
-              <span>ARMADURA&nbsp;H10&nbsp;6 × 6 × 6&nbsp;mm · 6 m B500T</span>
-              <button class="btn btn-outline-primary btn-sm copy-btn"
-                      data-clipboard-text="ARMADURA H10 cm 6x6x6 mm a 6 m B500T">
-                <i class="bi bi-clipboard"></i>
-              </button>
-            </td>
-          </tr>
+<div class="container w-100 mx-auto" style="max-width: 700px">
+      <h1 class="mb-4 pt-4 text-center">
+        Armadura<strong style="color: #6c2cf5"></strong>
+      </h1>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <!-- ENCABEZADOS -->
+          <thead>
+            <tr>
+              <th scope="col">MEDIDA</th>
+              <th scope="col">DESCRIPCIÓN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Fila de datos -->
 
-          <tr>
-            <td class="fw-bold bg-light text-center">H 14 cm</td>
-            <td class="d-flex justify-content-between">
-              <span>ARMADURA&nbsp;H14&nbsp;6 × 6 × 6&nbsp;mm · 6 m B500T</span>
-              <button class="btn btn-outline-primary btn-sm copy-btn"
-                      data-clipboard-text="ARMADURA H14 cm 6x6x6 mm a 6 m B500T">
-                <i class="bi bi-clipboard"></i>
-              </button>
-            </td>
-          </tr>
+            <tr>
+              <td
+                style="
+                  background-color: #6e2bf53a;
+                  color: black;
+                  font-weight: bold;
+                "
+              >
+                H10cm
+              </td>
+              <td>
+                <div class="copy-container">
+                  <span
+                    >ARMADURA
+                    <strong style="color: #6c2cf5">6x6x6. mm a 6m</strong>
+                    B500T</span
+                  >
+                  <button
+                    class="btn btn-outline-primary btn-sm copy-btn"
+                    data-clipboard-text="ARMADURA H 10 cm 6x6x6. mm a 6.000,00 mm   B500T"
+                  >
+                    <i class="bi bi-clipboard"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <!-- Fila de datos -->
+            <!-- Fila de datos -->
 
-          <tr>
-            <td class="fw-bold bg-light text-center">H 17 cm</td>
-            <td class="d-flex justify-content-between">
-              <span>ARMADURA&nbsp;H17&nbsp;6 × 6 × 6&nbsp;mm · 6 m B500T</span>
-              <button class="btn btn-outline-primary btn-sm copy-btn"
-                      data-clipboard-text="ARMADURA H17 cm 6x6x6 mm a 6 m B500T">
-                <i class="bi bi-clipboard"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            <tr>
+              <td
+                style="
+                  background-color: #6e2bf53a;
+                  color: black;
+                  font-weight: bold;
+                "
+              >
+                H14cm
+              </td>
+              <td>
+                <div class="copy-container">
+                  <span
+                    >ARMADURA
+                    <strong style="color: #6c2cf5">6x6x6. mm a 6m</strong>
+                    B500T</span
+                  >
+                  <button
+                    class="btn btn-outline-primary btn-sm copy-btn"
+                    data-clipboard-text="ARMADURA H 14 cm 6x6x6 mm a 6.000,00 mm   B500T"
+                  >
+                    <i class="bi bi-clipboard"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <!-- Fila de datos -->
+
+            <tr>
+              <td
+                style="
+                  background-color: #6e2bf53a;
+                  color: black;
+                  font-weight: bold;
+                "
+              >
+                H17cm
+              </td>
+              <td>
+                <div class="copy-container">
+                  <span
+                    >ARMADURA
+                    <strong style="color: #6c2cf5">6x6x6. mm a 6m</strong>
+                    B500T</span
+                  >
+                  <button
+                    class="btn btn-outline-primary btn-sm copy-btn"
+                    data-clipboard-text="ARMADURA H 17 cm 6x6x6 mm a 6.000,00 mm   B500T"
+                  >
+                    <i class="bi bi-clipboard"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
     <!-- aviso copiado -->
     <div id="copy-notification" class="alert alert-info copied" role="alert" style="display:none">
@@ -93,29 +153,44 @@
 
   <!-- ▸ SCRIPTS -->
   <script>
-    /* Menú y footer */
-    fetch('menu/menu.html').then(r=>r.text()).then(h=> menu-container.innerHTML=h);
-    fetch('footer/footer.html').then(r=>r.text()).then(h=>{
-      const d=document.createElement('div'); d.innerHTML=h;
-      footer-container.appendChild(d.querySelector('footer'));
-    });
+    /* ---------- menú y footer ---------- */
+    fetch('menu/menu.html')
+      .then(r => r.text())
+      .then(h => { document.getElementById('menu-container').innerHTML = h; });
 
-    /* Calculadora */
-    function calc(){ const p=+precio.value||0,d=+descuento.value||0; resultado.value=(p-p*d/100).toFixed(2); }
-    function resetCalc(){ precio.value=descuento.value=resultado.value=''; precio.focus(); }
+    fetch('footer/footer.html')
+      .then(r => r.text())
+      .then(h => {
+        const box = document.createElement('div'); box.innerHTML = h;
+        document.getElementById('footer-container')
+                .appendChild(box.querySelector('footer'));
+      });
 
-    /* Clipboard + notificación */
-    document.addEventListener('DOMContentLoaded',()=>{
-      const note=document.getElementById('copy-notification');
-      const cb = new ClipboardJS('.copy-btn');
-      cb.on('success',()=>{ note.style.display='block'; setTimeout(()=>note.style.display='none',1800); });
+    /* ---------- calculadora ---------- */
+    function calc () {
+      const p = parseFloat(precio.value)    || 0;
+      const d = parseFloat(descuento.value) || 0;
+      resultado.value = (p - p * d / 100).toFixed(2);
+    }
+    function resetCalc () {
+      precio.value = descuento.value = resultado.value = '';
+      precio.focus();
+    }
+
+    /* ---------- Clipboard ---------- */
+    document.addEventListener('DOMContentLoaded', () => {
+      const note = document.getElementById('copy-notification');
+      const clip = new ClipboardJS('.copy-btn');
+      clip.on('success', () => {
+        note.style.display = 'block';
+        setTimeout(() => { note.style.display = 'none'; }, 1800);
+      });
     });
   </script>
 
-  <!-- ajustes rápidos -->
+  <!-- ajustes mínimos -->
   <style>
-    .copy-btn{transition:none} .copy-btn:active{transform:none}
-    .table tbody td:first-child{min-width:90px;text-align:center}
+    .copy-btn{transition:none}.copy-btn:active{transform:none}
   </style>
 </body>
 </html>
