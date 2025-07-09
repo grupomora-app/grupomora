@@ -3,26 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <base href="/grupomora/"><!-- fuerza rutas correctas en GitHub Pages -->
+
+  <!-- ❶  TODAS las rutas internas parten de /grupomora/ -->
+  <base href="/grupomora/">
 
   <title>Vigas IPE | Catálogo Grupomora</title>
 
-  <!-- Bootstrap 5 + Icons (CDN absolutos) -->
+  <!-- ❷  Bootstrap 5 + Icons (CDN absolutos) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"               rel="stylesheet">
 
-  <!-- estilos propios -->
+  <!-- ❸  Estilos propios -->
   <link rel="stylesheet" href="estilos/styles.css">
 
-  <!-- JS externos (defer) -->
+  <!-- ❹  JS externos (defer) -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"   defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"            defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"     defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"              defer></script>
 </head>
 
 <body class="bg-light p-3">
 
-  <!-- ▸ MENÚ -->
+  <!-- ▸ MENÚ (inyectado) -->
   <div id="menu-container"></div>
 
   <!-- ▸ CALCULADORA -->
@@ -35,17 +37,15 @@
     </div>
   </section>
 
-  <!-- ▸ NAV ENTRE PERFILES -->
-  <div class="container text-center mt-4" style="max-width:700px">
-    <div class="d-flex justify-content-center flex-wrap gap-2">
-      <a class="btn btn-outline-primary" href="vigas/ipn_pruebas.html">IPN</a>
-      <a class="btn btn-outline-primary" href="vigas/hea_pruebas.html">HEA</a>
-      <a class="btn btn-outline-primary" href="vigas/heb_pruebas.html">HEB</a>
-      <a class="btn btn-outline-primary" href="vigas/upn_pruebas.html">UPN</a>
-    </div>
+  <!-- ▸ BOTONES SECCIÓN VIGAS -->
+  <div class="container text-center mt-5" style="max-width:700px">
+    <a class="btn btn-outline-primary m-1" href="vigas/ipn_pruebas.html">IPN</a>
+    <a class="btn btn-outline-primary m-1" href="vigas/hea_pruebas.html">HEA</a>
+    <a class="btn btn-outline-primary m-1" href="vigas/heb_pruebas.html">HEB</a>
+    <a class="btn btn-outline-primary m-1" href="vigas/upn_pruebas.html">UPN</a>
   </div>
 
-  <!-- ▸ TABLA PRINCIPAL -->
+  <!-- ▸ TABLA (una sola fila de ejemplo) -->
  <div class="container w-100 mx-auto" style="max-width: 700px">
       <div
         class="mb-4 pt-4 text-center d-flex justify-content-center align-items-center gap-5"
@@ -561,56 +561,40 @@
     </div>
   </main>
 
-  <!-- ▸ FOOTER -->
+  <!-- ▸ FOOTER (inyectado) -->
   <div id="footer-container"></div>
 
   <!-- ▸ SCRIPTS ESPECÍFICOS -->
   <script>
-    /* Menú y footer */
-    fetch('menu/menu.html').then(r=>r.text()).then(h=>{menu-container.innerHTML=h});
+    /* menú & footer */
+    fetch('menu/menu.html').then(r=>r.text()).then(h=>menu-container.innerHTML=h);
     fetch('footer/footer.html').then(r=>r.text()).then(h=>{
       const d=document.createElement('div'); d.innerHTML=h;
       footer-container.appendChild(d.querySelector('footer'));
     });
 
     /* calculadora */
-    function calc(){const p=parseFloat(precio.value)||0,d=parseFloat(descuento.value)||0;resultado.value=(p-p*d/100).toFixed(2);}
-    function resetCalc(){['precio','descuento','resultado'].forEach(id=>document.getElementById(id).value='');precio.focus();}
+    function calc(){const p=+precio.value||0, d=+descuento.value||0; resultado.value=(p-p*d/100).toFixed(2);}
+    function resetCalc(){precio.value=descuento.value=resultado.value=''; precio.focus();}
 
-    /* clipboard + selects */
+    /* clipboard + select */
     document.addEventListener('DOMContentLoaded',()=>{
       const note=document.getElementById('copy-note');
       const cb=new ClipboardJS('.copy-btn');
-      cb.on('success',()=>{note.style.display='block';setTimeout(()=>note.style.display='none',1800);});
-
-      function fmt(n){return n.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2,useGrouping:true});}
-
-      window.refresh = sel=>{
-        const row=sel.closest('tr'), largo=row.querySelector('td').innerText.trim().replace(',','.');
-        const mm=sel.value, rojo=switchRojo.checked, btn=row.querySelector('.copy-btn');
-        btn.dataset.clipboardText = rojo
-          ? `VIGA IPE ${mm} mm a ${largo} m G+I ROJO S275`
-          : `VIGA IPE ${mm} mm a ${largo} m ST`;
-      };
-
-      window.customLength = inp=>{
-        const row=inp.closest('tr'), mm=row.querySelector('select').value, val=fmt(parseFloat(inp.value)||0), btn=row.querySelector('.copy-btn');
-        btn.dataset.clipboardText = `VIGA IPE ${mm} mm a ${val} mm ST`;
-      };
-
-      switchRojo.addEventListener('change',()=>{
-        document.querySelectorAll('tbody tr').forEach(tr=>{
-          const sel=tr.querySelector('select'); if(sel) refresh(sel);
-        });
-      });
+      cb.on('success',()=>{note.style.display='block'; setTimeout(()=>note.style.display='none',1800);});
     });
+    function refresh(sel){
+      const row=sel.closest('tr');
+      const largo=row.dataset.long;
+      const dim = sel.value;
+      row.querySelector('.copy-btn')
+          .dataset.clipboardText = `VIGA IPE ${dim} mm a ${largo} m ST`;
+    }
   </script>
 
   <style>
-    .form-select-sm{padding:.25rem 1.5rem .25rem .5rem;font-size:.875rem;min-width:80px;height:calc(1.5em + .5rem + 2px);color:#6c2cf5;font-weight:bold}
-    .form-check-input{width:3em;height:1.5em;cursor:pointer;margin-right:.8em}
-    .form-check-input:checked{background:#dc3545;border-color:#dc3545}
-    .copy-btn:active{transform:none}
+    .copy-btn{transition:none} .copy-btn:active{transform:none}
+    .form-select-sm{font-size:.875rem;padding:.25rem .75rem;color:#6c2cf5;font-weight:bold;}
   </style>
 </body>
 </html>
