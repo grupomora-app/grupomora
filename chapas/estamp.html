@@ -41,43 +41,161 @@
   <main class="container" style="max-width:800px">
     <h2 class="pt-5 text-center">Chapas Estampadas <span class="text-primary">Decap.</span></h2>
     <div class="table-responsive mb-4">
-      <table class="table table-bordered table-hover align-middle">
-        <thead class="table-primary text-center"><tr><th>TIPO</th><th>DESCRIPCIÓN</th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="fw-bold bg-light">DC</td>
-            <td class="d-flex justify-content-between">
-              <span>CHAPA ESTAMP. DC 2000×1000×1,5 mm</span>
-              <button class="btn btn-outline-primary btn-sm copy-btn"
-                      data-clipboard-text="CHAPA ESTAMP. DC CACAHUETE 2000X1000X1,5 mm DC S235">
-                <i class="bi bi-clipboard"></i>
-              </button>
-            </td>
-          </tr>
-          <!-- duplica <tr> para 2 mm, 3000 × 1500… -->
-        </tbody>
-      </table>
+  <table class="table table-bordered table-hover">
+          <!-- ENCABEZADOS -->
+          <thead>
+            <tr>
+              <th scope="col">TIPO</th>
+              <th scope="col">DESCRIPCIÓN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Fila de datos -->
+            <tr>
+              <td
+                style="
+                  background-color: #6e2bf53a;
+                  color: black;
+                  font-weight: bold;
+                "
+              >
+                DC
+              </td>
+
+              <td>
+                <div class="copy-container">
+                  <span
+                    >CHAPA ESTAMP.
+                    <span style="color: #6c2cf5">DC</span>
+                    <strong style="color: #6c2cf5"
+                      >2000x1000x1,5 mm</strong
+                    ></span
+                  >
+                  <button
+                    class="btn btn-outline-primary btn-sm copy-btn"
+                    data-clipboard-text="CHAPA ESTAMP. DC CACAHUETE 2000x1000x1,5 mm  DC . S235"
+                  >
+                    <i class="bi bi-clipboard"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <!-- Fila de datos -->
+            <tr>
+              <td
+                style="
+                  background-color: #6e2bf53a;
+                  color: black;
+                  font-weight: bold;
+                "
+              >
+                DC
+              </td>
+
+              <td>
+                <div class="copy-container">
+                  <span
+                    >CHAPA ESTAMP.
+                    <span style="color: #6c2cf5">DC</span>
+                    <strong style="color: #6c2cf5">2000x1000x2 mm</strong></span
+                  >
+                  <button
+                    class="btn btn-outline-primary btn-sm copy-btn"
+                    data-clipboard-text="CHAPA ESTAMP. DC CACAHUETE 2000x1000x2 mm  DC . S235"
+                  >
+                    <i class="bi bi-clipboard"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Más filas -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Notificación de copia -->
+      <div id="copy-notification" class="alert alert-info copied" role="alert">
+        ¡Elemento copiado!
+      </div>
     </div>
 
-    <!-- ▸ TABLA GALVA -->
-    <h2 class="pt-3 text-center">Chapas Estampadas <span class="text-primary">Galva</span></h2>
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover align-middle">
-        <thead class="table-primary text-center"><tr><th>TIPO</th><th>DESCRIPCIÓN</th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="fw-bold bg-light">GV</td>
-            <td class="d-flex justify-content-between">
-              <span>CHAPA ESTAMP. GV 2000×1000×1,5 mm</span>
-              <button class="btn btn-outline-primary btn-sm copy-btn"
-                      data-clipboard-text="CHAPA ESTAMP. GV CACAHUETE 2000X1000X1,5 mm DX51">
-                <i class="bi bi-clipboard"></i>
-              </button>
-            </td>
-          </tr>
-          <!-- duplica <tr> para 2 mm, 3000 × 1500… -->
-        </tbody>
-      </table>
+    <!-- Tabla de datos GALVA -->
+    <div class="container w-100 mx-auto" style="max-width: 700px">
+      <h1 class="mb-4 pt-5 text-center">Chapas Estampadas Galva.</h1>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <!-- ENCABEZADOS -->
+          <thead>
+            <tr>
+              <th scope="col">TIPO</th>
+              <th scope="col">DESCRIPCIÓN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Fila de datos -->
+            <tr>
+              <td
+                style="
+                  background-color: #6e2bf53a;
+                  color: black;
+                  font-weight: bold;
+                "
+              >
+                GV
+              </td>
+
+              <td>
+                <div class="copy-container">
+                  <span
+                    >CHAPA ESTAMP.
+                    <span style="color: #6c2cf5">GV</span>
+                    <strong style="color: #6c2cf5"
+                      >2000x1000x1,5 mm</strong
+                    ></span
+                  >
+                  <button
+                    class="btn btn-outline-primary btn-sm copy-btn"
+                    data-clipboard-text="CHAPA ESTAMP. GV CACAHUETE 2000x1000x1,5 mm    DX51"
+                  >
+                    <i class="bi bi-clipboard"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <!-- Fila de datos -->
+            <tr>
+              <td
+                style="
+                  background-color: #6e2bf53a;
+                  color: black;
+                  font-weight: bold;
+                "
+              >
+                GV
+              </td>
+
+              <td>
+                <div class="copy-container">
+                  <span
+                    >CHAPA ESTAMP.
+                    <span style="color: #6c2cf5">GV</span>
+                    <strong style="color: #6c2cf5">2000x1000x2 mm</strong></span
+                  >
+                  <button
+                    class="btn btn-outline-primary btn-sm copy-btn"
+                    data-clipboard-text="CHAPA ESTAMP. GV CACAHUETE 2000x1000x2 mm    DX51"
+                  >
+                    <i class="bi bi-clipboard"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Más filas -->
+          </tbody>
+        </table>
     </div>
 
     <!-- aviso copiado -->
