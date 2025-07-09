@@ -1,69 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
-
-
-<!-- Mirrored from generador-crm-hma-kdj-github.netlify.app/tubos/tubos_6_raton by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Jun 2025 08:09:43 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Busqueda CRM - HMA - KDJ</title>
-  <link href="../../cdn.jsdelivr.net/npm/bootstrap%405.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <script src="../../cdn.jsdelivr.net/npm/%40popperjs/core%402.11.6/dist/umd/popper.min.js"></script>
-  <script src="../../cdn.jsdelivr.net/npm/bootstrap%405.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-  <script src="../../cdn.jsdelivr.net/npm/clipboard%402.0.10/dist/clipboard.min.js"></script>
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- Enlace al archivo CSS externo -->
-    <link rel="stylesheet" href="../estilos/styles.css" /></head>
+  <!-- todas las rutas internas parten de /grupomora/ -->
+  <base href="/grupomora/">
 
-<body class="bg-light p-3" style="margin-bottom: 100px">
+  <title>Tubos 6 m · Ratón | Catálogo Grupomora</title>
 
-  <!-- Menú de navegación -->
+  <!-- Bootstrap 5 + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"               rel="stylesheet">
+
+  <!-- estilos propios -->
+  <link rel="stylesheet" href="estilos/styles.css">
+
+  <!-- JS externos (defer) -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"   defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"            defer></script>
+</head>
+
+<body class="bg-light-gray p-3">
+
+  <!-- ▸ MENÚ -->
   <div id="menu-container"></div>
 
-  <!-- Inputs para precio, descuento y resultado -->
-<div class="row justify-content-center mt-4">
-  <div class="col-3 col-md-3 mb-3">
-    <input type="number" class="form-control" id="precio" placeholder="Precio" oninput="calcularResultado()" />
+  <!-- ▸ CALCULADORA -->
+  <section class="row justify-content-center mt-4 g-2">
+    <div class="col-12 col-md-3"><input id="precio"    class="form-control" type="number" placeholder="Precio"  oninput="calc()"></div>
+    <div class="col-12 col-md-3"><input id="descuento" class="form-control" type="number" placeholder="Dto."    oninput="calc()"></div>
+    <div class="col-12 col-md-3 d-flex align-items-center">
+      <input id="resultado" class="form-control" type="text" placeholder="Resultado" readonly>
+      <button class="btn btn-dark btn-sm ms-2" onclick="resetCalc()">Reset</button>
+    </div>
+  </section>
+
+  <!-- ▸ Enlace a 12 m -->
+  <div class="container text-center mt-4">
+    <a class="btn btn-outline-primary" href="tubos/tubos_12_raton.html">Ir a 12 m</a>
   </div>
-  <div class="col-3 col-md-3 mb-3">
-    <input type="number" class="form-control" id="descuento" placeholder="Dto." oninput="calcularResultado()" />
-  </div>
-  <div class="col-5 col-md-3 mb-3 d-flex align-items-center">
-    <input type="text" class="form-control" id="resultado" placeholder="Resultado" readonly />
-    <button class="btn btn-dark btn-sm ms-2" onclick="resetInputs()">Reset</button>
-  </div>
-</div>
 
-<!-- JavaScript para calcular el resultado y limpiar inputs -->
-<script>
-function calcularResultado() {
-  const precio = parseFloat(document.getElementById("precio").value) || 0;
-  const descuento = parseFloat(document.getElementById("descuento").value) || 0;
-  const resultado = precio - (precio * (descuento / 100));
-  document.getElementById("resultado").value = resultado.toFixed(2);
-}
+  <!-- ▸ TABLA (una fila por tipo, selects + copiar) -->
+  <main class="container" style="max-width:860px">
+    <h2 class="pt-5 text-center">Tubos de <span class="text-primary">6 m</span></h2>
 
-function resetInputs() {
-  document.getElementById("precio").value = '';
-  document.getElementById("descuento").value = '';
-  document.getElementById("resultado").value = '';
-  document.getElementById("precio").focus(); // Colocar el cursor en el input de "precio"
-}
-</script>
-
-<!-- Botón para ir a 12m -->
-<div class="container w-100 mx-auto text-center mt-5" style="max-width: 700px;">
-  <a class='btn btn-outline-primary' href='tubos_12_raton.html'>Ir a 12 m</a>
-</div>
-
-<!-- tabla 6mt editable -->
-  <div class="container w-100 mx-auto" style="max-width: 700px;">
-    <h1 class="mb-4 pt-3 text-center">Tubos de <span style="color:#6c2cf5">6mts</span></h1>
     <div class="table-responsive">
-      <table class="table table-bordered table-hover">
+       <table class="table table-bordered table-hover">
         <thead>
           <tr>
             <th scope="col"><i class="bi bi-circle"></i> REDONDO</th>
@@ -684,438 +668,59 @@ function resetInputs() {
           
         </tbody>
       </table>
-  </div>
-
-
-
-
-    <!-- Notificación de copia -->
-    <div id="copy-notification" class="alert alert-info copied" role="alert">
-      ¡Elemento copiado!
     </div>
 
+    <!-- aviso copiado -->
+    <div id="copy-notification" class="alert alert-info copied" role="alert" style="display:none">
+      ¡Texto copiado!
+    </div>
+  </main>
+
+  <!-- ▸ FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- ▸ SCRIPTS -->
   <script>
-    fetch('../menu/menu.html')
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById('menu-container').innerHTML = data;
-          });
-    // Inicializar Clipboard.js para los botones de copiar
-    var clipboard = new ClipboardJS('.copy-btn');
-
-
-    // Selección automática de texto al hacer clic en contenido editable
-    document.querySelectorAll('[contenteditable]').forEach(function(element) {
-      element.addEventListener('focus', function() {
-        var range = document.createRange();
-        var selection = window.getSelection();
-        range.selectNodeContents(this);
-        selection.removeAllRanges();
-        selection.addRange(range);
-      });
+    /* Menú y footer */
+    fetch('menu/menu.html').then(r=>r.text()).then(h=>{ menu-container.innerHTML = h });
+    fetch('footer/footer.html').then(r=>r.text()).then(h=>{
+      const d=document.createElement('div'); d.innerHTML=h;
+      footer-container.appendChild(d.querySelector('footer'));
     });
 
-    // Actualización dinámica del texto editable
-    document.querySelectorAll('[contenteditable]').forEach(function(element) {
-      element.addEventListener('input', function() {
-        // Obtener el nuevo valor del texto editable
-        var newText = this.innerText.trim()
-          .toLowerCase()
-          .replace(/\./g, ',')    // Reemplazar puntos por comas
-          .replace(/\*/g, 'x')    // Reemplazar asteriscos por x
-          .replace(/X/g, 'x');    // Reemplazar X mayúscula por x
-        
-        // Actualizar el texto visible con la transformación
-        this.innerText = newText;
-        
-        // Buscar el botón correspondiente en el mismo contenedor
-        var parentButton = this.closest('.copy-container').querySelector('.copy-btn');
-        
-        // Obtener el texto del botón antes de modificarlo
-        var originalText = parentButton.getAttribute('data-clipboard-text');
-        
-        // Identificar si es redondo, cuadrado o rectangular
-        var parts = originalText.split(' ');
-        var descriptionPart = parts[1]; // REDONDO, CUAD., RECT.
-        var typePart = parts[2]; // NG o GV
-        
-        // Si es cuadrado, convertir 60x3 o 60X3 a 60x60x3
-        if (descriptionPart === 'CUAD.') {
-          var dimensions = newText.split('x');
-          if (dimensions.length === 2) {
-            newText = dimensions[0] + 'x' + dimensions[0] + 'x' + dimensions[1];
+    /* Calculadora */
+    function calc(){
+      const p=parseFloat(precio.value)||0, d=parseFloat(descuento.value)||0;
+      resultado.value=(p-p*d/100).toFixed(2);
+    }
+    function resetCalc(){ precio.value=descuento.value=resultado.value=''; precio.focus(); }
+
+    /* Clipboard + selects */
+    document.addEventListener('DOMContentLoaded',()=>{
+      const note=document.getElementById('copy-notification');
+      const cb=new ClipboardJS('.copy-btn');
+      cb.on('success',()=>{ note.style.display='block'; setTimeout(()=>note.style.display='none',1800); });
+
+      /* genera texto cada vez que cambia un select */
+      document.querySelectorAll('tr[data-tipo]').forEach(row=>{
+        const tipo=row.dataset.tipo, cal=row.dataset.calidad;
+        row.querySelectorAll('.cfg').forEach((cell,idx)=>{
+          const forma=idx===0?'REDONDO':(idx===1?'CUAD.':'RECT.');
+          const dimSel=cell.querySelector('.dim'), espSel=cell.querySelector('.esp'), btn=cell.querySelector('.copy-btn');
+
+          function refresh(){
+            let dim=dimSel.value.replace('×','x'), esp=espSel.value.replace(',','.');
+            if(forma==='CUAD.') dim=`${dim}x${dim}`;
+            btn.dataset.clipboardText=`TUBO ${forma} ${tipo} ${dim}x${esp} mm a 6 m ${cal}`;
           }
-        }
-        
-        // Convertir el texto final a mayúsculas para mantener el formato
-        newText = newText.toUpperCase();
-        
-        var updatedText = `TUBO ${descriptionPart} ${typePart} ${newText} mm a 6 m ${originalText.split(' a 6 m ')[1]}`;
-        
-        // Actualizar el valor del botón de copiar con el nuevo texto
-        parentButton.setAttribute('data-clipboard-text', updatedText);
-        
-        // Colocar el cursor al final del texto
-        var range = document.createRange();
-        var sel = window.getSelection();
-        range.selectNodeContents(this);
-        range.collapse(false);
-        sel.removeAllRanges();
-        sel.addRange(range);
+          dimSel.addEventListener('change',refresh); espSel.addEventListener('change',refresh); refresh();
+        });
       });
     });
-
-    // Prevenir el salto de línea al presionar Enter y confirmar edición
-    document.querySelectorAll('[contenteditable]').forEach(function(element) {
-      element.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-          event.preventDefault(); // Prevenir salto de línea
-          this.blur(); // Confirma la edición al perder el foco
-        }
-      });
-    });
-
-    document.querySelectorAll('.dimension-select, .espesor-select').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select');
-            const espesorSelect = container.querySelector('.espesor-select');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            // Obtener los valores seleccionados
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value.replace('.', ',');
-            
-            // Construir el nuevo texto para el clipboard
-            const newText = `TUBO CUAD. NG ${dimension}x${dimension}x${espesor} mm a 6 m ST`;
-            
-            // Actualizar el atributo data-clipboard-text
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Event listener para los selectores de dimensión y espesor redondos
-    document.querySelectorAll('.dimension-select-redondo, .espesor-select-redondo').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-redondo');
-            const espesorSelect = container.querySelector('.espesor-select-redondo');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value;
-            const newText = `TUBO REDONDO NG ${dimension}x${espesor} mm a 6 m ST`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Event listener para los selectores de dimensión y espesor redondos galvanizados
-    document.querySelectorAll('.dimension-select-redondo-gv, .espesor-select-redondo-gv').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-redondo-gv');
-            const espesorSelect = container.querySelector('.espesor-select-redondo-gv');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value.replace('.', ',');
-            const newText = `TUBO REDONDO GV ${dimension}x${espesor} mm a 6 m GV  DX51`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Event listener para los selectores de dimensión y espesor redondos DC
-    document.querySelectorAll('.dimension-select-redondo-dc, .espesor-select-redondo-dc').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-redondo-dc');
-            const espesorSelect = container.querySelector('.espesor-select-redondo-dc');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value.replace('.', ',');
-            const newText = `TUBO REDONDO DC ${dimension}x${espesor} mm a 6 m DC . E220`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Event listener para los selectores de dimensión y espesor cuadrados galvanizados
-    document.querySelectorAll('.dimension-select, .espesor-select').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select');
-            const espesorSelect = container.querySelector('.espesor-select');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            // Verificar si el botón contiene "GV"
-            if (copyBtn.innerHTML.includes('GV')) {
-                const dimension = dimensionSelect.value;
-                const espesor = espesorSelect.value.replace('.', ',');
-                const newText = `TUBO CUAD. GV ${dimension}x${dimension}x${espesor} mm a 6 m GV  DX51`;
-                copyBtn.setAttribute('data-clipboard-text', newText);
-            }
-        });
-    });
-
-    // Para tubos cuadrados DC
-    document.querySelectorAll('.dimension-select, .espesor-select').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select');
-            const espesorSelect = container.querySelector('.espesor-select');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            if (copyBtn.innerHTML.includes('DC')) {
-                const dimension = dimensionSelect.value;
-                const espesor = espesorSelect.value.replace('.', ',');
-                const newText = `TUBO CUAD. DC ${dimension}x${dimension}x${espesor} mm a 6 m DC . E220`;
-                copyBtn.setAttribute('data-clipboard-text', newText);
-            }
-        });
-    });
-
-    // Para tubos redondos GV
-    document.querySelectorAll('.dimension-select-redondo-gv, .espesor-select-redondo-gv').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-redondo-gv');
-            const espesorSelect = container.querySelector('.espesor-select-redondo-gv');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value.replace('.', ',');
-            const newText = `TUBO REDONDO GV ${dimension}x${espesor} mm a 6 m GV  DX51`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Para tubos redondos DC
-    document.querySelectorAll('.dimension-select-redondo-dc, .espesor-select-redondo-dc').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-redondo-dc');
-            const espesorSelect = container.querySelector('.espesor-select-redondo-dc');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value.replace('.', ',');
-            const newText = `TUBO REDONDO DC ${dimension}x${espesor} mm a 6 m DC . E220`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Para tubos rectangulares NG
-    document.querySelectorAll('.dimension-select-rect-ng, .espesor-select-rect-ng').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-rect-ng');
-            const espesorSelect = container.querySelector('.espesor-select-rect-ng');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value;
-            const newText = `TUBO RECT. NG ${dimension}x${espesor} mm a 6 m ST`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Para tubos rectangulares GV
-    document.querySelectorAll('.dimension-select-rect-gv, .espesor-select-rect-gv').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-rect-gv');
-            const espesorSelect = container.querySelector('.espesor-select-rect-gv');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value.replace('.', ',');
-            const newText = `TUBO RECT. GV ${dimension}x${espesor} mm a 6 m GV  DX51`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Para tubos rectangulares DC
-    document.querySelectorAll('.dimension-select-rect-dc, .espesor-select-rect-dc').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-rect-dc');
-            const espesorSelect = container.querySelector('.espesor-select-rect-dc');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value.replace('.', ',');
-            const newText = `TUBO RECT. DC ${dimension}x${espesor} mm a 6 m DC . E220`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Inicializar Clipboard.js
-    var clipboard = new ClipboardJS('.copy-btn');
-
-    clipboard.on('success', function(e) {
-        const button = e.trigger;
-        const originalContent = button.innerHTML;
-        
-        // Cambiar a icono de check
-        button.innerHTML = '<i class="bi bi-check-circle"></i>';
-        
-        setTimeout(() => {
-            button.innerHTML = originalContent;
-        }, 1000);
-        
-        e.clearSelection();
-    });
-
-    // Para tubos redondos NG
-    document.querySelectorAll('.dimension-select-redondo, .espesor-select-redondo').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-redondo');
-            const espesorSelect = container.querySelector('.espesor-select-redondo');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value;
-            const newText = `TUBO REDONDO NG ${dimension}x${espesor} mm a 6 m ST`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Para tubos cuadrados NG
-    document.querySelectorAll('.dimension-select-cuadrado-ng, .espesor-select-cuadrado-ng').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-cuadrado-ng');
-            const espesorSelect = container.querySelector('.espesor-select-cuadrado-ng');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value;
-            const newText = `TUBO CUAD. NG ${dimension}x${dimension}x${espesor} mm a 6 m ST`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Para tubos cuadrados GV
-    document.querySelectorAll('.dimension-select-cuadrado-gv, .espesor-select-cuadrado-gv').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-cuadrado-gv');
-            const espesorSelect = container.querySelector('.espesor-select-cuadrado-gv');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value.replace('.', ',');
-            const newText = `TUBO CUAD. GV ${dimension}x${dimension}x${espesor} mm a 6 m GV  DX51`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Para tubos cuadrados DC
-    document.querySelectorAll('.dimension-select-cuadrado-dc, .espesor-select-cuadrado-dc').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-cuadrado-dc');
-            const espesorSelect = container.querySelector('.espesor-select-cuadrado-dc');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value.replace('.', ',');
-            const newText = `TUBO CUAD. DC ${dimension}x${dimension}x${espesor} mm a 6 m DC . E220`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Para tubos rectangulares NG
-    document.querySelectorAll('.dimension-select-rect-ng, .espesor-select-rect-ng').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-rect-ng');
-            const espesorSelect = container.querySelector('.espesor-select-rect-ng');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value;
-            const newText = `TUBO RECT. NG ${dimension}x${espesor} mm a 6 m ST`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Para tubos rectangulares GV
-    document.querySelectorAll('.dimension-select-rect-gv, .espesor-select-rect-gv').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-rect-gv');
-            const espesorSelect = container.querySelector('.espesor-select-rect-gv');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value.replace('.', ',');
-            const newText = `TUBO RECT. GV ${dimension}x${espesor} mm a 6 m GV  DX51`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Para tubos rectangulares DC
-    document.querySelectorAll('.dimension-select-rect-dc, .espesor-select-rect-dc').forEach(select => {
-        select.addEventListener('change', function() {
-            const container = this.closest('.copy-container');
-            const dimensionSelect = container.querySelector('.dimension-select-rect-dc');
-            const espesorSelect = container.querySelector('.espesor-select-rect-dc');
-            const copyBtn = container.querySelector('.copy-btn');
-            
-            const dimension = dimensionSelect.value;
-            const espesor = espesorSelect.value.replace('.', ',');
-            const newText = `TUBO RECT. DC ${dimension}x${espesor} mm a 6 m DC . E220`;
-            copyBtn.setAttribute('data-clipboard-text', newText);
-        });
-    });
-
-    // Inicializar Clipboard.js
-    var clipboard = new ClipboardJS('.copy-btn');
-
-    clipboard.on('success', function(e) {
-        e.clearSelection();
-    });
-
   </script>
 
-  
-
-<!-- Footer container -->
-    <div id="footer-container"></div>
-
-    <!-- Script para el footer -->
-    <script>
-      fetch("../footer/footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          const tempDiv = document.createElement("div");
-          tempDiv.innerHTML = data;
-          const footer = tempDiv.querySelector("footer");
-          document.getElementById("footer-container").appendChild(footer);
-        })
-        .catch((error) => {
-          console.error("Error cargando el footer:", error);
-        });
-    </script>
-
-    <!-- Añade estos estilos justo después del último <link> en el <head> -->
-    <style>
-      .copy-btn {
-        transition: none;
-      }
-
-      .copy-btn:active {
-        transform: none;
-      }
-
-      .copy-btn.copied {
-        animation: none;
-      }
-    </style>
-  </body>
-
-
-<!-- Mirrored from generador-crm-hma-kdj-github.netlify.app/tubos/tubos_6_raton by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Jun 2025 08:09:43 GMT -->
+  <style>
+    .copy-btn{transition:none} .copy-btn:active{transform:none}
+  </style>
+</body>
 </html>
