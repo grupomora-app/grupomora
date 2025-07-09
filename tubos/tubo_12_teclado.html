@@ -1,68 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
-
-
-<!-- Mirrored from generador-crm-hma-kdj-github.netlify.app/tubos/tubo_12_teclado by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Jun 2025 08:09:42 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Busqueda CRM - HMA - KDJ</title>
-  <link href="../../cdn.jsdelivr.net/npm/bootstrap%405.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <script src="../../cdn.jsdelivr.net/npm/%40popperjs/core%402.11.6/dist/umd/popper.min.js"></script>
-  <script src="../../cdn.jsdelivr.net/npm/bootstrap%405.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-  <script src="../../cdn.jsdelivr.net/npm/clipboard%402.0.10/dist/clipboard.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- Enlace al archivo CSS externo -->
-    <link rel="stylesheet" href="../estilos/styles.css" /></head>
+  <!-- raíz para TODAS las rutas internas -->
+  <base href="/grupomora/">
 
-<body class="bg-light p-3" style="margin-bottom: 100px">
+  <title>Tubos 12 m · Edición rápida | Catálogo Grupomora</title>
 
-  <!-- Menú de navegación -->
+  <!-- Bootstrap 5 + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"               rel="stylesheet">
+
+  <!-- hoja de estilos del proyecto -->
+  <link rel="stylesheet" href="estilos/styles.css">
+
+  <!-- JS externos (defer) -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"   defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"            defer></script>
+</head>
+
+<body class="bg-light-gray p-3">
+
+  <!-- ▸ MENÚ -->
   <div id="menu-container"></div>
 
-  <!-- Inputs para precio, descuento y resultado -->
-<div class="row justify-content-center mt-4">
-  <div class="col-3 col-md-3 mb-3">
-    <input type="number" class="form-control" id="precio" placeholder="Precio" oninput="calcularResultado()" />
+  <!-- ▸ CALCULADORA -->
+  <section class="row justify-content-center mt-4 g-2">
+    <div class="col-12 col-md-3"><input id="precio"    class="form-control" type="number" placeholder="Precio"  oninput="calc()"></div>
+    <div class="col-12 col-md-3"><input id="descuento" class="form-control" type="number" placeholder="Dto."    oninput="calc()"></div>
+    <div class="col-12 col-md-3 d-flex align-items-center">
+      <input id="resultado" class="form-control" type="text" placeholder="Resultado" readonly>
+      <button class="btn btn-dark btn-sm ms-2" onclick="resetForm()">Reset</button>
+    </div>
+  </section>
+
+  <!-- ▸ ATALHO 6 m -->
+  <div class="container text-center mt-4">
+    <a class="btn btn-outline-primary" href="tubos/tubo_6_auto_v2.html">Ir a 6 m</a>
   </div>
-  <div class="col-3 col-md-3 mb-3">
-    <input type="number" class="form-control" id="descuento" placeholder="Dto." oninput="calcularResultado()" />
-  </div>
-  <div class="col-5 col-md-3 mb-3 d-flex align-items-center">
-    <input type="text" class="form-control" id="resultado" placeholder="Resultado" readonly />
-    <button class="btn btn-dark btn-sm ms-2" onclick="resetInputs()">Reset</button>
-  </div>
-</div>
 
-<!-- JavaScript para calcular el resultado y limpiar inputs -->
-<script>
-function calcularResultado() {
-  const precio = parseFloat(document.getElementById("precio").value) || 0;
-  const descuento = parseFloat(document.getElementById("descuento").value) || 0;
-  const resultado = precio - (precio * (descuento / 100));
-  document.getElementById("resultado").value = resultado.toFixed(2);
-}
+  <!-- ▸ TABLA 12 m -->
+  <main class="container" style="max-width:800px">
+    <h2 class="pt-5 text-center">Tubos de <span class="text-primary">12 m</span></h2>
 
-function resetInputs() {
-  document.getElementById("precio").value = '';
-  document.getElementById("descuento").value = '';
-  document.getElementById("resultado").value = '';
-  document.getElementById("precio").focus(); // Colocar el cursor en el input de "precio"
-}
-</script>
-
-<!-- Botón para ir a 6m -->
-<div class="container w-100 mx-auto text-center mt-5" style="max-width: 700px;">
-  <a class='btn btn-outline-primary' href='tubos_6_auto_v2.html'>Ir a 6m</a>
-</div>
-
-<!-- tabla 6mt editable -->
-  <div class="container w-100 mx-auto" style="max-width: 700px;">
-    <h1 class="mb-4 pt-3 text-center">Tubos de <span style="color:#6c2cf5">12mts</span></h1>
     <div class="table-responsive">
-      <table class="table table-bordered table-hover">
+     <table class="table table-bordered table-hover">
         <thead>
           <tr>
             <th scope="col"></th>
@@ -161,150 +146,93 @@ function resetInputs() {
           
         </tbody>
       </table>
-  </div>
-
-
-
-
-    <!-- Notificación de copia -->
-    <div id="copy-notification" class="alert alert-info copied" role="alert">
-      ¡Elemento copiado!
     </div>
 
+    <!-- aviso copiado -->
+    <div id="copy-notification" class="alert alert-info copied" role="alert" style="display:none">
+      ¡Texto copiado!
+    </div>
+  </main>
+
+  <!-- ▸ FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- ▸ SCRIPTS -->
   <script>
-    fetch('../menu/menu.html')
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById('menu-container').innerHTML = data;
-          });
-    // Inicializar Clipboard.js para los botones de copiar
-    var clipboard = new ClipboardJS('.copy-btn', {
-      text: function(trigger) {
-        return trigger.getAttribute('data-clipboard-text');
-      }
-    });
+    /* Menú y footer */
+    fetch('menu/menu.html')
+      .then(r => r.text())
+      .then(html => { document.getElementById('menu-container').innerHTML = html; });
 
-    // Mostrar notificación de copia
-    clipboard.on('success', function(e) {
-      var notification = document.getElementById('copy-notification');
-      notification.style.display = 'block';
-      setTimeout(function() {
-        notification.style.display = 'none';
-      }, 2000); // Ocultar después de 2 segundos
-      e.clearSelection();
-    });
-
-    // Selección automática de texto al hacer clic en contenido editable
-    document.querySelectorAll('[contenteditable]').forEach(function(element) {
-      element.addEventListener('focus', function() {
-        var range = document.createRange();
-        var selection = window.getSelection();
-        range.selectNodeContents(this);
-        selection.removeAllRanges();
-        selection.addRange(range);
+    fetch('footer/footer.html')
+      .then(r => r.text())
+      .then(html => {
+        const box = document.createElement('div'); box.innerHTML = html;
+        document.getElementById('footer-container').appendChild(box.querySelector('footer'));
       });
-    });
 
-    // Actualización dinámica del texto editable
-    document.querySelectorAll('[contenteditable]').forEach(function(element) {
-      element.addEventListener('input', function() {
-        // Obtener el nuevo valor del texto editable
-        var newText = this.innerText.trim()
-          .toLowerCase()
-          .replace(/\./g, ',')    // Reemplazar puntos por comas
-          .replace(/\*/g, 'x')    // Reemplazar asteriscos por x
-          .replace(/X/g, 'x');    // Reemplazar X mayúscula por x
-        
-        // Actualizar el texto visible con la transformación
-        this.innerText = newText;
-        
-        // Buscar el botón correspondiente en el mismo contenedor
-        var parentButton = this.closest('.copy-container').querySelector('.copy-btn');
-        
-        // Obtener el texto del botón antes de modificarlo
-        var originalText = parentButton.getAttribute('data-clipboard-text');
-        
-        // Identificar si es redondo, cuadrado o rectangular
-        var parts = originalText.split(' ');
-        var descriptionPart = parts[1]; // REDONDO, CUAD., RECT.
-        var typePart = parts[2]; // NG o GV
-        
-        // Si es cuadrado, convertir 60x3 o 60X3 a 60x60x3
-        if (descriptionPart === 'CUAD.') {
-          var dimensions = newText.split('x');
-          if (dimensions.length === 2) {
-            newText = dimensions[0] + 'x' + dimensions[0] + 'x' + dimensions[1];
-          }
-        }
-        
-        // Convertir el texto final a mayúsculas para mantener el formato
-        newText = newText.toUpperCase();
-        
-        var updatedText = `TUBO ${descriptionPart} ${typePart} ${newText} mm a 12 m ${originalText.split(' a 12 m ')[1]}`;
-        
-        // Actualizar el valor del botón de copiar con el nuevo texto
-        parentButton.setAttribute('data-clipboard-text', updatedText);
-        
-        // Colocar el cursor al final del texto
-        var range = document.createRange();
-        var sel = window.getSelection();
-        range.selectNodeContents(this);
-        range.collapse(false);
-        sel.removeAllRanges();
-        sel.addRange(range);
-      });
-    });
+    /* Calculadora */
+    function calc(){
+      const p = parseFloat(precio.value)||0,
+            d = parseFloat(descuento.value)||0;
+      resultado.value = (p - p*d/100).toFixed(2);
+    }
+    function resetForm(){
+      precio.value = descuento.value = resultado.value = '';
+      precio.focus();
+    }
 
-    // Prevenir el salto de línea al presionar Enter y confirmar edición
-    document.querySelectorAll('[contenteditable]').forEach(function(element) {
-      element.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-          event.preventDefault(); // Prevenir salto de línea
-          this.blur(); // Confirma la edición al perder el foco
-        }
-      });
-    });
+    /* Clipboard + Edición dinámica */
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const note = document.getElementById('copy-notification');
+      const cb   = new ClipboardJS('.copy-btn');
 
-  </script>
-
-<!-- Footer container -->
-    <div id="footer-container"></div>
-
-    <!-- Script para el footer -->
-    <script>
-      fetch("../footer/footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          const tempDiv = document.createElement("div");
-          tempDiv.innerHTML = data;
-          const footer = tempDiv.querySelector("footer");
-          document.getElementById("footer-container").appendChild(footer);
-        })
-        .catch((error) => {
-          console.error("Error cargando el footer:", error);
-        });
-    </script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Inicializar clipboard para cada botón individualmente
-    document.querySelectorAll(".copy-btn").forEach(function (btn) {
-      var clipboard = new ClipboardJS(btn);
-
-      clipboard.on("success", function (e) {
-        // Opcional: Feedback visual al usuario
-        const originalText = e.trigger.innerHTML;
-        e.trigger.innerHTML = '<i class="bi bi-check"></i>';
-        setTimeout(function () {
-          e.trigger.innerHTML = originalText;
-        }, 2000);
+      cb.on('success', e=>{
+        note.style.display='block';
+        setTimeout(()=> note.style.display='none',1800);
         e.clearSelection();
       });
+
+      /* selección completa al entrar */
+      document.querySelectorAll('[contenteditable]').forEach(el=>{
+        el.addEventListener('focus', ()=>{
+          const sel=window.getSelection(); sel.removeAllRanges();
+          const r=document.createRange();  r.selectNodeContents(el); sel.addRange(r);
+        });
+      });
+
+      /* actualización texto botón */
+      document.querySelectorAll('[contenteditable]').forEach(el=>{
+        el.addEventListener('input', ()=>{
+          let txt = el.innerText.trim()
+                     .toLowerCase()
+                     .replace(/\./g, ',')
+                     .replace(/\*/g, 'x')
+                     .replace(/x+/g,'x');
+
+          const btn  = el.closest('.copy-container').querySelector('.copy-btn');
+          const base = btn.dataset.clipboardText.split(' ');
+          const forma= base[1];          // REDONDO / CUAD. / RECT.
+          const tipo = base[2];          // NG / GV / DC …
+
+          if(forma==='CUAD.'){
+            const dim=txt.split('x');
+            if(dim.length===2) txt=`${dim[0]}x${dim[0]}x${dim[1]}`;
+          }
+          txt = txt.toUpperCase();
+
+          btn.dataset.clipboardText =
+            `TUBO ${forma} ${tipo} ${txt} mm a 12 m ${base.slice(-1)[0]}`;
+        });
+      });
+
+      /* bloquear Enter */
+      document.querySelectorAll('[contenteditable]').forEach(el=>{
+        el.addEventListener('keydown',e=>{
+          if(e.key==='Enter'){ e.preventDefault(); el.blur(); }
+        });
+      });
     });
-  });
-</script>
-  </body>
-
-
-<!-- Mirrored from generador-crm-hma-kdj-github.netlify.app/tubos/tubo_12_teclado by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Jun 2025 08:09:43 GMT -->
+  </script>
+</body>
 </html>
